@@ -3,12 +3,13 @@
 
 Background::Background()
 {
+	menuBackgroundY = Globals::screenHeight*.5;
+	menuBackgroundY2 = Globals::screenHeight*1.5;
+	menuTime = 0;
+	IsShowTime = true;
 }
-int menuTime;
-bool IsShowTime = true;
 
-int menuBackgroundY = Globals::screenHeight;
-int menuBackgroundY2 = Globals::screenHeight;
+
 void Background::MenuFlash()
 {
 
@@ -39,8 +40,9 @@ void Background::CreateMainMenuBackground()
 	MoveSprite(menuBackground2, Globals::screenWidth*.5, menuBackgroundY2);
 	DrawSprite(menuBackground2);
 
-	menuBackgroundY -= GetDeltaTime()*Globals::screenHeight*.02;
-	menuBackgroundY2 -= GetDeltaTime()*Globals::screenHeight*.02;
+	menuBackgroundY -= GetDeltaTime()*(Globals::screenHeight*.2);
+	menuBackgroundY2 -= GetDeltaTime()*(Globals::screenHeight*.2);
+
 	if (menuBackgroundY <= Globals::screenHeight*-.5)
 	{
 		menuBackgroundY = Globals::screenHeight*1.5;

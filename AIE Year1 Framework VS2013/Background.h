@@ -10,8 +10,9 @@ public:
 	char * menuText = "Press Enter to Start";
 	unsigned int menuBackground;
 	unsigned int menuBackground2;
-	int menuBackgroundY;
-	int menuBackgroundY2;
+
+	float menuBackgroundY;
+	float menuBackgroundY2;
 	void MenuFlash();
 	void CreateMainMenuBackground();
 	Background();
