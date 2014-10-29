@@ -6,10 +6,9 @@ Background::Background()
 }
 int menuTime;
 bool IsShowTime = true;
-char menuText[30] = "Press Enter to Start";
-unsigned int menuBackground = CreateSprite("/images/mainmenu.png", Globals::screenWidth, Globals::screenHeight, true);
-int menuBackgroundY = Globals::screenHeight*.5;
-int menuBackgroundY2 = Globals::screenHeight*1.5;
+
+int menuBackgroundY = Globals::screenHeight;
+int menuBackgroundY2 = Globals::screenHeight;
 void Background::MenuFlash()
 {
 
@@ -35,13 +34,13 @@ void Background::MenuFlash()
 
 void Background::CreateMainMenuBackground()
 {
-	MoveSprite(menuBackground, Globals::screenWidth*.5, menuBackgroundY*.975);
+	MoveSprite(menuBackground, Globals::screenWidth*.5, menuBackgroundY);
 	DrawSprite(menuBackground);
-	MoveSprite(menuBackground2, Globals::screenWidth*.5, menuBackgroundY2*.975);
-	DrawSprite(menuBackground);
+	MoveSprite(menuBackground2, Globals::screenWidth*.5, menuBackgroundY2);
+	DrawSprite(menuBackground2);
 
-	menuBackground -= GetDeltaTime()*Globals::screenHeight*.2;
-	menuBackground -= GetDeltaTime()*Globals::screenHeight*.2;
+	menuBackgroundY -= GetDeltaTime()*Globals::screenHeight*.02;
+	menuBackgroundY2 -= GetDeltaTime()*Globals::screenHeight*.02;
 	if (menuBackgroundY <= Globals::screenHeight*-.5)
 	{
 		menuBackgroundY = Globals::screenHeight*1.5;

@@ -1,6 +1,10 @@
 ﻿#include "AIE.h"
 #include <iostream>
 #include "Globals.h"
+#include "Background.h"
+#include "Player.h"
+#include "Enemy.h"
+#include "Bullet.h"
 
 
 
@@ -17,9 +21,11 @@ enum GAMESTATES{
 int main( int argc, char* argv[] )
 {	
     Initialise(800, 800, false, "AIE 2nd Project");
-	
-	
 	SetBackgroundColour(SColour(0x00, 0x00, 0x00, 0xFF));
+	Background mainmenu;
+	mainmenu.menuBackground = CreateSprite("./images/mainmenu.png", Globals::screenWidth, Globals::screenHeight, true);
+	mainmenu.menuBackground2 = CreateSprite("./images/mainmenu.png", Globals::screenWidth, Globals::screenHeight, true);
+	
 
     
 
@@ -30,11 +36,13 @@ int main( int argc, char* argv[] )
 		switch (currentState)
 		{
 		case MAINMENU:
-		
-			if (IsKeyDown(KEY_ENTER))
+			mainmenu.MenuFlash();
+			mainmenu.CreateMainMenuBackground();
+			if (IsKeyDown(GLFW_KEY_ENTER))
 			{
 				currentState = GAMEPLAY;
 			}
+			ClearScreen();
 			break;
 
 
