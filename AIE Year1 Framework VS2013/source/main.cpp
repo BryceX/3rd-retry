@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Bullet.h"
+#include <vector>
 
 
 
@@ -32,12 +33,19 @@ int main( int argc, char* argv[] )
 	lyn.spriteID = CreateSprite("./images/lyn.png", lyn.width, lyn.height, true);
 	lyn.x = Globals::screenWidth*.5;
 	lyn.y = Globals::screenHeight*.05;
-	//lyn.firingKey = 'F';
-	
-	
+	//lyn.firingKey = 'F';	
 	lyn.SetKey(GLFW_KEY_W, GLFW_KEY_S, GLFW_KEY_A, GLFW_KEY_D);
     
-
+	
+	static std::vector<Enemy*> type1;
+	for (int i = 0, i < 6, ++i)
+	{
+		type1.width = Globals::screenWidth*.075;
+		type1.height = Globals::screenHeight*.05;
+		type1.SpriteID = CreateSprite("./images/enemy1.png", type1.width, type1.height, true);
+		type1.x = Globals::screenWidth*.5;
+		type1.y = Globals::screenHeight*1.25;
+	}
     //Game Loop
 	GAMESTATES currentState = MAINMENU;
     do
@@ -60,6 +68,8 @@ int main( int argc, char* argv[] )
 		case GAMEPLAY:
 			lyn.Move();
 			lyn.Draw();
+			type1.Movement();
+			type1.Draw();
 			
 			break;
 
