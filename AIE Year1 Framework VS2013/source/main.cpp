@@ -13,6 +13,7 @@ char menuText1[20] = "AIE 2nd Project";
 char menuText2[30] = "Press Enter To Start";
 std::vector<Bullet> bulletvector;
 void ShootBullet(int a_x, int a_y);
+float gameTimePassed = 0;
 
 
 enum GAMESTATES{
@@ -100,7 +101,7 @@ int main(int argc, char* argv[])
 
 		case GAMEPLAY:
 
-
+			gameTimePassed += GetDeltaTime();
 
 			if (lyn.health < 0)
 			{
@@ -153,6 +154,17 @@ int main(int argc, char* argv[])
 				type1vector[i].Draw();
 				lyn.Collision(lyn.x, lyn.y, type1vector[i].x, type1vector[i].y, Globals::screenWidth*.1, Globals::screenWidth*.1);
 				}
+			}
+			if (gameTimePassed > 10)
+			{
+				gameTimePassed = 0;
+				for (int i = 0; i < 6; i++)
+				{
+					type1.y += 40;
+					type1.spriteID = CreateSprite("./images/enemy1.png", type1.width, type1.height, true);
+					type1vector.push_back(type1);
+				}
+				
 			}
 		
 				
