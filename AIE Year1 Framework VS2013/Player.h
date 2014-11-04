@@ -16,7 +16,7 @@ public:
 	float firingDelay;
 	void Move(float a_deltaTime);
 	void SetKey(float upKey, float downKey, float leftKey, float rightKey);
-	void Collision();
+	void Collision(float a_x, float a_y, float enemy_x, float enemy_y, float a_radius, float enemy_radius);
 	float upKey;
 	float downKey;
 	float leftKey;

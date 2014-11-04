@@ -30,6 +30,7 @@ int main(int argc, char* argv[])
 	mainmenu.menuBackground2 = CreateSprite("./images/mainmenu.png", Globals::screenWidth, Globals::screenHeight*1.0055, true);
 
 	Player lyn;
+	lyn.health = 5;
 	lyn.width = Globals::screenWidth*.05;
 	lyn.height = Globals::screenHeight*.05;
 	lyn.spriteID = CreateSprite("./images/lyn.png", lyn.width, lyn.height, true);
@@ -53,6 +54,7 @@ int main(int argc, char* argv[])
 
 	std::vector<Enemy> type1vector;
 	Enemy type1;
+	type1.health = 1;
 	type1.width = Globals::screenWidth*.05;
 	type1.height = Globals::screenHeight*.05;
 	type1.x = Globals::screenWidth*.5;
@@ -114,11 +116,17 @@ int main(int argc, char* argv[])
 
 					type1vector[i].Movement();
 					type1vector[i].Draw();
+					lyn.Collision(lyn.x, lyn.y, type1vector[i].x, type1vector[i].y, Globals::screenWidth*.05, Globals::screenWidth*.05);
 
+					if (type1vector[i].health = 0)
+					{
+						type1vector[i].KilledEnemy();
+					}
 
 				}
 				lyn.Move(deltaTime);
 				lyn.Draw();
+				
 
 
 

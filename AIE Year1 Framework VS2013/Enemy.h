@@ -12,7 +12,8 @@ public:
 	int health;
 	void Movement();
 	void Draw();
-	void Collision();
+	void Collision(float a_x, float a_y, float enemy_x, float enemy_y, float a_radius, float enemy_radius);
+	void KilledEnemy();
 	Enemy();
 	~Enemy();
 };

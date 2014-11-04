@@ -11,9 +11,13 @@ void Player::Draw()
 	MoveSprite(spriteID, x, y);
 	DrawSprite(spriteID);
 }
-void Player::Collision()
+void Player::Collision(float a_x, float a_y, float enemy_x, float enemy_y, float a_radius, float enemy_radius)
 {
-
+	if ((((a_x - enemy_x)*(a_x - enemy_x)) + ((a_y - enemy_y)*(a_y - enemy_y))) < a_radius + enemy_radius)
+	{
+		health -= 1;
+		std::cout << "acollisionhashappened";
+	}
 }
 void Player::SetKey(float upKey, float downKey, float leftKey, float rightKey)
 {
