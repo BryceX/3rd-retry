@@ -11,6 +11,7 @@ public:
 	float y;
 	float width;
 	float height;
+	int health;
 	bool isAlive;
 	void Movement();
 	void Draw();
@@ -18,8 +19,7 @@ public:
 	void Collision();
 	void GetXY(float playerX, float playerY);
 	float gameTime;
-
-	
+	void Collision(float a_x, float a_y, float enemy_x, float enemy_y, float a_radius, float enemy_radius);
 	Bullet();
 	~Bullet();
 };

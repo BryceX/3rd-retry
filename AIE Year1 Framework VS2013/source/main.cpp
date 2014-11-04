@@ -41,12 +41,13 @@ int main(int argc, char* argv[])
 
 	float deltaTime;
 	Bullet dagger;
+	dagger.health = 1;
 	dagger.width = Globals::screenWidth *.025;
 	dagger.height = Globals::screenHeight *.025;
 
 	dagger.gameTime = 0;
 
-	for (int i = 0; i < 50; i++)
+	for (int i = 0; i < 12; i++)
 	{
 		dagger.spriteID = CreateSprite("./images/dagger.png", dagger.width, dagger.height, true);
 		bulletvector.push_back(dagger);
@@ -64,6 +65,18 @@ int main(int argc, char* argv[])
 		type1.y += 40;
 		type1.spriteID = CreateSprite("./images/enemy1.png", type1.width, type1.height, true);
 		type1vector.push_back(type1);
+	}
+	std::vector<Enemy> type2vector;
+	Enemy type2;
+	type2.health = 2;
+	type2.width = Globals::screenWidth*.1;
+	type2.height = Globals::screenHeight*.1;
+	type2.x = Globals::screenWidth*.5;
+	type2.y = Globals::screenHeight*1.5;
+	for (int i = 0; i < 4; i++)
+	{
+		type2.y += 80;
+		//type2.spriteID = CreateSprite()
 	}
 	//Game Loop
 	GAMESTATES currentState = MAINMENU;
@@ -89,7 +102,13 @@ int main(int argc, char* argv[])
 
 
 
+			if (lyn.health < 0)
+			{
+				currentState = GAMEOVER;
+			}
 
+			lyn.Move(deltaTime);
+			lyn.Draw();
 
 			if (IsKeyDown(GLFW_KEY_F))
 			{
@@ -102,30 +121,40 @@ int main(int argc, char* argv[])
 
 			for (int i = 0; i < bulletvector.size(); ++i)
 			{
-				if (bulletvector[i].isAlive)
-				{
+				for (int j = 0; j < type1vector.size(); ++j)
+				{				
+					if (bulletvector[i].isAlive)
+					{
+						
+						{
 
-					bulletvector[i].gameTime += deltaTime;
-					bulletvector[i].Movement();
-					bulletvector[i].Draw();
+							bulletvector[i].gameTime += deltaTime;
+							bulletvector[i].Movement();
+							bulletvector[i].Draw();
+
+						
+							if (type1vector[j].isAlive)
+							{
+								bulletvector[i].Collision(bulletvector[i].x, bulletvector[i].y, type1vector[j].x, type1vector[j].y, Globals::screenWidth*.05, Globals::screenWidth*.1);
+								type1vector[j].Collision(type1vector[j].x, type1vector[j].y, bulletvector[i].x, bulletvector[i].y, Globals::screenWidth*.1, Globals::screenWidth*.05);
+							}
+						}
+					}
 				}
 
 			}
-				for (int i = 0; i < type1vector.size(); ++i)
+
+			// Player and Enemy
+			for (int i = 0; i < type1vector.size(); ++i)
+			{
+				if (type1vector[i].isAlive)
 				{
-
-					type1vector[i].Movement();
-					type1vector[i].Draw();
-					lyn.Collision(lyn.x, lyn.y, type1vector[i].x, type1vector[i].y, Globals::screenWidth*.05, Globals::screenWidth*.05);
-
-					if (type1vector[i].health = 0)
-					{
-						type1vector[i].KilledEnemy();
-					}
-
+				type1vector[i].Movement();
+				type1vector[i].Draw();
+				lyn.Collision(lyn.x, lyn.y, type1vector[i].x, type1vector[i].y, Globals::screenWidth*.1, Globals::screenWidth*.1);
 				}
-				lyn.Move(deltaTime);
-				lyn.Draw();
+			}
+		
 				
 
 
@@ -134,6 +163,10 @@ int main(int argc, char* argv[])
 				break;
 
 		case GAMEOVER:
+			if (IsKeyDown (GLFW_KEY_LEFT_CONTROL))
+			{
+				currentState = MAINMENU;
+			}
 			break;
 
 

@@ -14,6 +14,8 @@ public:
 	void Draw();
 	void Collision(float a_x, float a_y, float enemy_x, float enemy_y, float a_radius, float enemy_radius);
 	void KilledEnemy();
+	bool isAlive = true;
+	bool HitBoxOn = true;
 	Enemy();
 	~Enemy();
 };
