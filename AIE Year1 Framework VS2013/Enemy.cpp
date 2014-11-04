@@ -7,12 +7,12 @@ Enemy::Enemy()
 }
 void Enemy::Draw()
 {
-	MoveSprite(SpriteID, x, y);
-	DrawSprite(SpriteID);
+	MoveSprite(spriteID, x, y);
+	DrawSprite(spriteID);
 }
 void Enemy::Movement()
 {
-	y -= Globals::screenHeight*.05*GetDeltaTime();
+	y -= Globals::screenHeight*.1*GetDeltaTime();
 }
 
 Enemy::~Enemy()

@@ -3,11 +3,17 @@
 
 Player::Player()
 {
+	firingDelay = .1f;
+	timeWhenShot = 0;
 }
 void Player::Draw()
 {
 	MoveSprite(spriteID, x, y);
 	DrawSprite(spriteID);
+}
+void Player::Collision()
+{
+
 }
 void Player::SetKey(float upKey, float downKey, float leftKey, float rightKey)
 {
@@ -16,11 +22,14 @@ void Player::SetKey(float upKey, float downKey, float leftKey, float rightKey)
 	this->leftKey = leftKey;
 	this->rightKey = rightKey;
 }
-void Player::Move()
+
+void Player::Move(float a_deltaTime)
 {
+	timeWhenShot += a_deltaTime;
+
 	if (IsKeyDown(upKey))
 	{
-		y += Globals::screenHeight*.2*GetDeltaTime();
+		y += (Globals::screenHeight)*(.2*GetDeltaTime());
 		if (y > Globals::screenHeight - height*.5)
 		{
 			y = Globals::screenHeight - height*.5;
@@ -28,7 +37,7 @@ void Player::Move()
 	}
 	if (IsKeyDown(downKey))
 	{
-		y -= height*.2*GetDeltaTime();
+		y -= (Globals::screenHeight)*(.2*GetDeltaTime());
 		if (y < height*.5)
 		{
 			y = height*.5;
@@ -36,7 +45,7 @@ void Player::Move()
 	}
 	if (IsKeyDown(leftKey))
 	{
-		x -= Globals::screenWidth*.35*GetDeltaTime();
+		x -= Globals::screenWidth*.3*GetDeltaTime();
 		if (x < Globals::screenWidth*.125 + width*.5)
 		{
 			x = Globals::screenWidth*.125 + width*.5;
@@ -44,7 +53,7 @@ void Player::Move()
 	}
 	if (IsKeyDown(rightKey))
 	{
-		x += Globals::screenWidth*.35*GetDeltaTime();
+		x += (Globals::screenWidth)*(.3*GetDeltaTime());
 		if (x > Globals::screenWidth*.875 - width*.5)
 		{
 			x = Globals::screenWidth*.875 - width*.5;

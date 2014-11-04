@@ -4,14 +4,15 @@
 class Enemy
 {
 public:
-	unsigned int SpriteID;
-	int width;
-	int height;
-	int x;
-	int y;
+	unsigned int spriteID;
+	float width;
+	float height;
+	float x;
+	float y;
 	int health;
 	void Movement();
 	void Draw();
+	void Collision();
 	Enemy();
 	~Enemy();
 };
